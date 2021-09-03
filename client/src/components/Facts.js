@@ -26,14 +26,18 @@ const Facts = (props) => {
       console.log(error);
     }
   };
+  const updateFact = (fact) => {
+    let updatedFacts = facts.map((f) => (f.id == fact.id ? fact : f));
+    setFacts(updatedFacts);
+  };
 
   const renderFacts = () => {
-    return facts.map((f) => <Fact key={f.id} {...f} />);
+    return facts.map((f) => <Fact updateFact={updateFact} key={f.id} {...f} />);
   };
   return (
     <div>
       <h1>Facts</h1>
-      {renderFacts()}
+      <div>{renderFacts()}</div>
     </div>
   );
 };
