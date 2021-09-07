@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   # all api endpoint (routes) go in here
   namespace :api do
     get '/facts', to:'facts#index'
+    get '/facts/:id', to:"facts#show"
     post '/facts', to:"facts#create"
    
-    put '/facts/:id', to: 'facts#rate'
+    put '/facts/:id/rate', to: 'facts#rate'
+    put '/facts/:id', to: 'facts#update'
   end
 end

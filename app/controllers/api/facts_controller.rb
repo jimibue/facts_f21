@@ -4,7 +4,14 @@ class Api::FactsController < ApplicationController
     render json: Fact.all
   end
 
+  def show
+    render json: Fact.find(params[:id])
+  end
+
+  
+
   def rate
+    puts "rate called"
      @fact = Fact.find(params[:id])
      # need the new rating
      @fact.stars = params[:stars]
@@ -21,6 +28,17 @@ class Api::FactsController < ApplicationController
       render json: {error: fact.errors}, status: :unprocessible_entity
     end
   end
+
+  def update
+    puts "update called"
+    fact = Fact.find(params[:id])
+    if(fact.update(fact_params))
+      render json: fact
+    else
+      render json: {error: fact.errors}, status: :unprocessible_entity
+    end
+  end
+
 
   private
 
