@@ -11,4 +11,20 @@ class Api::FactsController < ApplicationController
      @fact.save
      render json: @fact
   end
+
+  def create
+    fact = Fact.new(fact_params)
+    fact.stars = fact.stars ? fact.stars : 0
+    if(fact.save)
+      render json: fact
+    else
+      render json: {error: fact.errors}, status: :unprocessible_entity
+    end
+  end
+
+  private
+
+  def fact_params
+    params.require(:fact).permit(:username, :source, :text,:stars)
+  end
 end
