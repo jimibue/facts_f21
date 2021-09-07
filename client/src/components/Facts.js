@@ -37,6 +37,7 @@ const Facts = (props) => {
   return (
     <div>
       <h1>Facts</h1>
+      <div onClick={() => props.history.push("/facts/new")}>New Fact</div>
       <div>{renderFacts()}</div>
     </div>
   );
